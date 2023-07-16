@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  </head>
+  <body>
+    <!-- code for nav used bootstrap templates -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" href="">ToDo</a>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active" >
+              <a class="nav-link" href="/create">Create</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!-- code for from used bootstraped tempaltes  -->
+   
+      <div class="container my-5">
+        <h2 class = "text-center">What's on you mind today</h2>
+        
+            <form action = "/create" method = "post">
+              {% csrf_token %}
+
+              {% if success %}
+                <div class="alert alert-success" role="alert" id="success-alert">
+                Task Added  <a href="/" class="alert-link">see your task</a>.
+                </div>
+
+                <script>
+                  $(document).ready(function() {
+                    const alertElement = $('#success-alert');
+                    const fadeOutTime = 3500;
+                    const fadeOutAlert = function() {
+                      alertElement.fadeOut('slow', function() {
+                        $(this).remove();
+                      });
+                    };
+                    setTimeout(fadeOutAlert, fadeOutTime);
+                  });
+                </script>
+              {% endif %}
+
+                <div class="form-group">
+                  <label for = "title">Task</label>
+                  <input type="text" class="form-control" placeholder="Task for the day" id="title" name="title">
+                 </div>
+                <div class="form-group">
+                  <label for="desc">Desciption</label>
+                  <textarea class="form-control" id ="desc" name = "desc" cols="20" rows="5" placeholder="Task desciption"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dateInput">Select Start date:</label><br>
+                    <input type="date" id="startDateInput" name="startDateInput"/>
+                </div>
+                <div class="form-group">
+                    <label for="dateInput">Select End date:</label><br>
+                    <input type="date" id="endDateInput" name="endDateInput">
+                </div>
+
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="isCompleted"  name = "isCompleted"> 
+                  <label> Is task Completed </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id = "isCompleted">Add Task</button>
+            </form>
+        </div>
+      </div>
+      
+</body>
+</html>
